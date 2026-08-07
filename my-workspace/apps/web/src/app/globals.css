@@ -1,1 +1,12 @@
 @import "tailwindcss";
+
+body {
+   background-color: #F5F1E8;
+   font-family: 'Archivo', sans-serif;
+}
+
+@layer base {
+  body {
+    @apply mx-6 my-4;
+  }
+}

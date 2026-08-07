@@ -1,5 +1,6 @@
 import './globals.css';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
 export const metadata = {
   title: 'Welcome to ',
@@ -14,7 +15,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Navbar />
-      <body>{children}</body>
+      <body className="flex min-h-screen flex-col">
+         <main className="flex-1">{children}</main>
+      </body>
+      <Footer />
     </html>
   )
 }
