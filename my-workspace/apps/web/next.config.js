@@ -7,6 +7,8 @@ const nextConfig = {
   turbopack: {
     root: path.join(__dirname, '../..'),
   },
+  // Hide the Next.js dev indicator (bottom-left "N" badge)
+  devIndicators: false,  
   // See: https://nextjs.org/docs/app/api-reference/config/next-config-js
 };
 
