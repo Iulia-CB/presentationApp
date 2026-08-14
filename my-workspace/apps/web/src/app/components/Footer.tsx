@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function Footer() {
+export default function FooterSection() {
    return(
       <footer className="flex justify-between gap-2 text-center border-t p-4">
          <span className="italic leading-tight text-lg">Dr. Atena Muresan</span>
