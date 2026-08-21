@@ -7,9 +7,9 @@ export default function Navbar() {
             <Link href="/" className="italic leading-tight text-lg">Dr. Atena Muresan</Link>
             <span className="text-xs text-stone-500 uppercase tracking-wide">Chirurgie Plastică & Estetică</span>
          </div>
-         <nav className="flex items-center gap-8 font-medium">
-            <Link href="/about" className="hover:underline">Despre</Link>
-            <Link href="/procedures" className="hover:underline">Procedures</Link>
+         <nav className="flex items-center gap-8 font-semibold">
+            <Link href="#about" className="hover:underline">Despre</Link>
+            <Link href="#procedures" className="hover:underline">Procedures</Link>
             <Link href="/results" className="hover:underline">Rezultate</Link>
          </nav>
          <div className="flex items-center gap-8 font-medium">

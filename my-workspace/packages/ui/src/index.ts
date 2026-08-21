@@ -1,3 +1,2 @@
-export * from './lib/ui';
-export * from './lib/hero-banner';
-export * from './lib/feature-card';
+export { default as Navbar } from './lib/navbar';
+export { default as FooterSection } from './lib/footer';

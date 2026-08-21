@@ -1,6 +1,6 @@
 import './globals.css';
-import Navbar from './components/Navbar';
-import FooterSection from './components/Footer';
+import { Navbar, FooterSection } from '@nextjs-template/ui';
+import Page from './page';
 
 export const metadata = {
   title: 'Welcome to ',
@@ -14,11 +14,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <Navbar />
       <body className="flex min-h-screen flex-col">
+      <Navbar />
          <main className="flex-1">{children}</main>
-      </body>
       <FooterSection />
+      </body>
     </html>
   )
 }
