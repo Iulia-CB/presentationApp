@@ -1,8 +1,12 @@
-import { heroData } from "./data/hero";
+import { heroDataRo } from "./data/hero/ro";
+import { heroDataEn } from "./data/hero/en";
 import Image from 'next/image';
 import Link from "next/link";
 
-export default function Hero() {
+const translations = { ro: heroDataRo, en: heroDataEn };
+
+export default function Hero({ lang }: { lang: string }) {
+   const heroData = translations[lang as keyof typeof translations] ?? translations.ro;
    return (
       <section
          id="hero"

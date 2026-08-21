@@ -8,6 +8,6 @@ body {
 
 @layer base {
   body {
-    @apply mx-6 my-4;
+    @apply mx-6 my-4 leading-tight;
   }
 }

@@ -1,4 +1,4 @@
-export const aboutData = {
+export const aboutDataRo = {
    eyebrow: 'Parcurs Profesional',
    milestones: [
       {

@@ -1,4 +1,4 @@
-export const proceduresData = {
+export const proceduresDataRo = {
   eyebrow: 'Ce Ofer',
   title: 'Proceduri principale',
   note: 'Fiecare procedură începe cu o consultație dedicată de evaluare — nu cu o ofertă de preț.',

@@ -1,6 +1,10 @@
-import { aboutData } from "./data/about"
+import { aboutDataRo } from "./data/about/ro"
+import { aboutDataEn } from "./data/about/en"
 
-export default function About() {
+const translations = { ro: aboutDataRo, en: aboutDataEn };
+
+export default function About({ lang }: { lang: string }) {
+   const aboutData = translations[lang as keyof typeof translations] ?? translations.ro;
    return(
       <section id="about" className="grid grid-cols-1 md:grid-cols-2 bg-mist-800 leading-tight"> 
          <div className="">

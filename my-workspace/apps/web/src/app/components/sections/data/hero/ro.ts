@@ -1,4 +1,4 @@
-export const heroData = {
+export const heroDataRo = {
    eyebrow: '- Consultație & Evaluare Individuală',
    title: 'Precizie chirurgicală,',
    titleEmphasis: 'rezultate naturale.',
