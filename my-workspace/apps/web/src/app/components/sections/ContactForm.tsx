@@ -1,4 +1,4 @@
-export default function ContactForm({ contactData }) {
+export default function ContactForm({ contactData } : { contactData: any }) {
    return (
       <form className="w-full max-w-lg p-2">
          <div className="flex flex-wrap -mx-3 mb-3">
