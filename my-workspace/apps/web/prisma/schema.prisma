@@ -1,0 +1,120 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  PATIENT
+  DOCTOR
+}
+
+enum AppointmentStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+}
+
+// --- Auth.js required models ---
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String  @map("user_id")
+  type              String
+  provider          String
+  providerAccountId String  @map("provider_account_id")
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique @map("session_token")
+  userId       String   @map("user_id")
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
+// --- Your app models ---
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  password      String? // hashed password, for Credentials provider
+  role          Role      @default(PATIENT)
+  emailVerified DateTime? @map("email_verified")
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  accounts Account[]
+  sessions Session[]
+
+  // patient-side appointments
+  appointmentsAsPatient Appointment[] @relation("PatientAppointments")
+  // doctor-side appointments
+  appointmentsAsDoctor  Appointment[] @relation("DoctorAppointments")
+
+  @@map("users")
+}
+
+model Procedure {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  appointments Appointment[]
+
+  @@map("procedures")
+}
+
+model Appointment {
+  id          String            @id @default(cuid())
+  date        DateTime
+  status      AppointmentStatus @default(PENDING)
+  notes       String?
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  patientId   String
+  patient     User      @relation("PatientAppointments", fields: [patientId], references: [id], onDelete: Cascade)
+
+  doctorId    String
+  doctor      User      @relation("DoctorAppointments", fields: [doctorId], references: [id], onDelete: Restrict)
+
+  procedureId String
+  procedure   Procedure @relation(fields: [procedureId], references: [id], onDelete: Restrict)
+
+  @@map("appointments")
+}
