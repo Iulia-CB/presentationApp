@@ -25,4 +25,6 @@ export const authFormDataRo = {
       text: 'Nu ai cont?',
       linkLabel: 'Creează unul',
    },
+   signInErrors: 'Email sau parola incorecte.',
+   unexpectedError: 'A aparut o eroare neprevazuta.'   
 };

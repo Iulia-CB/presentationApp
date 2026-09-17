@@ -20,11 +20,11 @@ export default function Navbar({
          </nav>
          <div className="flex items-center gap-4 font-medium">
             <Link
-               href={`/${lang}/auth`}
+               href='#auth'
                className="px-5 py-2.5 transition-colors hover:bg-stone-300"
             >Contul meu</Link>
             <Link 
-               href={`/${lang}/contact`} 
+               href='#schedule' 
                className="rounded-md bg-stone-700 px-5 py-2.5 font-semibold text-white transition-colors hover:bg-stone-500"
             >
                Programeaza-te

@@ -25,4 +25,6 @@ export const authFormDataEn = {
       text: "Don't have an account?",
       linkLabel: 'Create one',
    },
+   signInErrors: 'Incorrect email or password.',
+   unexpectedError: 'An unexpected error occurred.'
 };

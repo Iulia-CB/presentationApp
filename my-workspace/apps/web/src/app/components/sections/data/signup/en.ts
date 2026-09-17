@@ -7,6 +7,16 @@ export const signupFormDataEn = {
    subtitleDoctor: 'Create doctor account.',
    subtitlePatient: 'Access your appointments and consultation history.',
    fields: {
+      firstName: {
+         label: 'First Name',
+         type: 'text',
+         placeholder: 'Jane',
+      },
+      lastName: {
+         label: 'Last Name',
+         type: 'text',
+         placeholder: 'Smith',
+      },         
       email: {
          label: 'Email',
          type: 'email',

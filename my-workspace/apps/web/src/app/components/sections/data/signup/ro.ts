@@ -7,6 +7,16 @@ export const signupFormDataRo = {
    subtitleDoctor: 'Creeaza cont ca medic.',
    subtitlePatient: 'Vezi programările tale și istoricul consultațiilor.',
    fields: {
+      firstName: {
+         label: 'Prenume',
+         type: 'text',
+         placeholder: 'Ana',
+      },
+      lastName: {
+         label: 'Nume',
+         type: 'text',
+         placeholder: 'Constantin',
+      },       
       email: {
          label: 'E-mail',
          type: 'email',
