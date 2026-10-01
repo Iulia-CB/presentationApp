@@ -35,9 +35,10 @@ export async function POST(request: Request) {
       data: {
         firstName,
         lastName,
-        email,
+        email: email.trim().toLowerCase(),
         password: hashedPassword,
         role: role === 'DOCTOR' ? 'DOCTOR' : 'PATIENT',
+        preferredLanguage: lang === 'en' ? 'en' : 'ro'
       },
     });
 

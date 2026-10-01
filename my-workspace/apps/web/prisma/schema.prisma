@@ -75,6 +75,7 @@ model User {
   role          Role      @default(PATIENT)
   emailVerified DateTime? @map("email_verified")
   image         String?
+  preferredLanguage String @default("ro")
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
@@ -92,8 +93,10 @@ model User {
 model Procedure {
   id          String   @id @default(cuid())
   slug        String   @unique
-  title       String
-  description String
+  titleRo       String
+  titleEn       String
+  descriptionRo String
+  descriptionEn String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
@@ -110,8 +113,14 @@ model Appointment {
   createdAt   DateTime          @default(now())
   updatedAt   DateTime          @updatedAt
 
-  patientId   String
-  patient     User      @relation("PatientAppointments", fields: [patientId], references: [id], onDelete: Cascade)
+  patientId   String?
+  patient     User?     @relation("PatientAppointments", fields: [patientId], references: [id], onDelete: Cascade)
+
+  // Guest contact info, used only when patientId is null
+  guestFirstName   String?
+  guestLastName   String?
+  guestEmail  String?
+  guestPhone  String?
 
   doctorId    String
   doctor      User      @relation("DoctorAppointments", fields: [doctorId], references: [id], onDelete: Restrict)
@@ -120,4 +129,15 @@ model Appointment {
   procedure   Procedure @relation(fields: [procedureId], references: [id], onDelete: Restrict)
 
   @@map("appointments")
+}
+
+model Translation {
+  id        String   @id @default(cuid())
+  namespace String
+  locale    String
+  content   Json
+  updatedAt DateTime @updatedAt
+
+  @@unique([namespace, locale])
+  @@map("translations")
 }

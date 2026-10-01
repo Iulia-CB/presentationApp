@@ -10,9 +10,16 @@ export default function LanguageSwitcher({ lang }: { lang: string }) {
   const rest = pathname.split('/').slice(2).join('/');
   const href = `/${otherLang}${rest ? `/${rest}` : ''}`;
 
-  // persist the manual choice so future visits to "/" respect it
+  // persist the manual choice
   const handleClick = () => {
     document.cookie = `NEXT_LOCALE=${otherLang}; path=/; max-age=31536000`;
+
+    fetch('/api/languagePref', {
+      method: 'POST',
+      headers: { 'Content-type': 'application/json' },
+      body: JSON.stringify({ lang: otherLang }),
+      keepalive: true, // to not abort the request
+    })
   };
 
   return (

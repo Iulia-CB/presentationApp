@@ -1,3 +1,4 @@
+import { prisma } from "@/lib/prisma";
 import { contactDataEn } from "./data/contact/en";
 import { contactDataRo } from "./data/contact/ro";
 import ContactSchedule from "./ContactSchedule";
@@ -5,7 +6,11 @@ import ContactForm from "./ContactForm";
 
 const translations = { ro: contactDataRo, en: contactDataEn };
 
-export default function Procedures({ lang }: { lang: string }) {
+export default async function Contact({ lang }: { lang: string }) {
+   const procedures = await prisma.procedure.findMany({
+      select: { id: true, titleRo: true, titleEn: true },
+      orderBy: { titleRo: 'asc' }
+   })
   const contactData = translations[lang as keyof typeof translations] ?? translations.ro;
    return(
       <section
@@ -24,7 +29,11 @@ export default function Procedures({ lang }: { lang: string }) {
          </div>
 
          <div className="mx-auto w-full max-w-md bg-stone-200 p-4">
-            <ContactForm contactData={contactData}/>
+            <ContactForm 
+               contactData={contactData}
+               procedures={procedures}
+               lang={lang} 
+            />
          </div>
       </section>
    )

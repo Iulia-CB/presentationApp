@@ -16,7 +16,6 @@ export default function Navbar({
          <nav className="flex items-center gap-8 font-semibold">
             <Link href="#about" className="hover:underline">Despre</Link>
             <Link href="#procedures" className="hover:underline">Procedures</Link>
-            <Link href={`/${lang}/results`} className="hover:underline">Rezultate</Link>
          </nav>
          <div className="flex items-center gap-4 font-medium">
             <Link

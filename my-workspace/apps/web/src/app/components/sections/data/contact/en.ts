@@ -9,7 +9,8 @@ export const contactDataEn = {
       { label: 'Urgent cases', value: 'Priority consultations within 48h, on request' },
    ],
   fields: {
-    fullName: { label: 'Full name', placeholder: 'Ex: Ana Popescu' },
+    firstName: { label: 'First name', placeholder: 'Ex: Ana' },
+    lastName: { label: 'Last name', placeholder: 'Ex: Popescu' },
     phone: { label: 'Phone', placeholder: '07xx xxx xxx' },
     email: { label: 'Email', placeholder: 'name@example.com' },
     procedure: { label: 'Procedure of interest', type: 'select', options: ['Rhinoplasty'] },
@@ -18,4 +19,6 @@ export const contactDataEn = {
   },
    submitLabel: 'Send appointment request',
    disclaimer: 'This is a request — our team confirms the exact time within 24 business hours.',
+   genericError: 'Sorry, an error has occurred.',
+   successMessage: 'Request received, we will soon get back at you.'
 };
