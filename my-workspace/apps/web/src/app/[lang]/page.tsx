@@ -1,3 +1,4 @@
+import { getTranslation } from "@/lib/getTranslations";
 import About from "../components/sections/About";
 import Hero from "../components/sections/Hero";
 import Procedures from "../components/sections/Procedures";
@@ -5,19 +6,33 @@ import Contact from "../components/sections/Contact";
 import AuthSection from "../components/sections/AuthSection";
 
 export default async function Page({
-  params,
+   params,
 }: {
-  params: Promise<{ lang: string }>;
+   params: Promise<{ lang: string }>;
 }) {
-  const { lang } = await params;
-  return (
-    <div >
-      <Hero lang={lang} />
-      <About lang={lang} />
-      <Procedures lang={lang} />
-      <Contact lang={lang} />
-      <AuthSection lang={lang} />
-    </div>
-  );
+   const { lang } = await params;
+   const heroData = await getTranslation('hero', lang);
+   const aboutData = await getTranslation('about', lang);
+   const proceduresData = await getTranslation('procedures', lang);
+   const contactData = await getTranslation('contact', lang);
+   const loginData = await getTranslation('authLogin', lang);
+   const signupFormData = await getTranslation('authSignup', lang);
+
+   return (
+      <div >
+         <Hero heroData={heroData} />
+         <About aboutData={aboutData} />
+         <Procedures proceduresData={proceduresData} />
+         <Contact
+            contactData={contactData} 
+            lang={lang}
+         />
+         <AuthSection
+            loginData={loginData}
+            signupFormData={signupFormData}
+            lang={lang}
+         />
+      </div>
+   );
 }
 

@@ -1,20 +1,10 @@
 
 'use client';
 import { useState } from "react";
-import { authFormDataEn } from "./data/login/en";
-import { authFormDataRo } from "./data/login/ro";
-import { signupFormDataEn } from "./data/signup/en";
-import { signupFormDataRo } from "./data/signup/ro";
 import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
 
-const translations = { ro: authFormDataRo, en: authFormDataEn };
-const signupFormTranslations = { ro: signupFormDataRo, en: signupFormDataEn }
-
-export default function AuthSection({ lang }: { lang: string }) {
-   const loginData = translations[lang as keyof typeof translations] ?? translations.ro;
-   const signupFormData = signupFormTranslations[lang as keyof typeof signupFormTranslations] ?? signupFormTranslations.ro;
-
+export default function AuthSection({ loginData, signupFormData, lang }: { loginData: any; signupFormData: any; lang: string; }) {
    const [activeTab, setActiveTab] = useState(loginData.tabs[0].id);
    const [view, setView] = useState('login')
 

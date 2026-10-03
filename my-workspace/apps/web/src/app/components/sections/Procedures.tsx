@@ -1,11 +1,6 @@
-import { proceduresDataRo } from "./data/procedures/ro"
-import { proceduresDataEn } from "./data/procedures/en"
 import ProcedureCard from "./ProceduresCard";
 
-const translations = { ro: proceduresDataRo, en: proceduresDataEn };
-
-export default function Procedures({ lang }: { lang: string }) {
-   const proceduresData = translations[lang as keyof typeof translations] ?? translations.ro;
+export default function Procedures({ proceduresData }: { proceduresData: any }) {
    return (
       <section id="procedures" className=" m-5 leading-tight">
          <div className="grid grid-cols-1 md:grid-cols-2">

@@ -1,6 +1,7 @@
 import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
 import { prisma } from '@/lib/prisma';
+import { getTranslation } from '@/lib/getTranslations';
 import { myAccountDataEn } from './data/en';
 import { myAccountDataRo } from './data/ro';
 
@@ -14,7 +15,8 @@ export default async function MyAccount({
 }) {
    const { lang } = await params;
    const session = await auth();
-   const myAccountData = translations[lang as keyof typeof translations] ?? translations.ro;
+   // const myAccountData = translations[lang as keyof typeof translations] ?? translations.ro;
+   const myAccountData = await getTranslation('myAccount', lang);
 
    if (!session) {
       redirect(`/${lang}`);
