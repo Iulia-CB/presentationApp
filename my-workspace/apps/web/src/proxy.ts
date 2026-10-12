@@ -12,8 +12,8 @@ export const proxy = auth((request) => {
    );
 
    if (!hasLangPrefix) {
-      const sessionLang = request.auth?.user.preferredLanguage;
-      const cookieLang = request.cookies.get('NEXT_LOCALE')?.value;
+      const sessionLang = request.auth?.user.preferredLanguage; // from db 
+      const cookieLang = request.cookies.get('NEXT_LOCALE')?.value; // from cookie
 
       const preferredSessionLang = supportedLanguages.find((lang) => lang === sessionLang);
       const preferredCookieLang = supportedLanguages.find((lang) => lang === cookieLang);
@@ -40,5 +40,5 @@ export const proxy = auth((request) => {
 });
 
 export const config = {
-   matcher: ['/((?!_next|api|images|favicon.ico).*)'],
+   matcher: ['/((?!_next|api|.*\\..*).*)'],
 };

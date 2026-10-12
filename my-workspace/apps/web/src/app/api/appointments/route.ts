@@ -1,4 +1,3 @@
-// apps/web/src/app/api/appointments/route.ts
 import { NextResponse } from 'next/server';
 import { auth } from '@/auth';
 import { prisma } from '@/lib/prisma';
@@ -12,7 +11,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Procedura și data sunt obligatorii.' }, { status: 400 });
    }
 
-   if (!session && (!firstName || lastName || !email || !phone)) {
+   if (!session && (!firstName || !lastName || !email || !phone)) {
       return NextResponse.json(
          { error: 'Nume, email și telefon sunt obligatorii pentru programări fără cont.' },
          { status: 400 }

@@ -2,11 +2,6 @@ import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
 import { prisma } from '@/lib/prisma';
 import { getTranslation } from '@/lib/getTranslations';
-import { myAccountDataEn } from './data/en';
-import { myAccountDataRo } from './data/ro';
-
-const translations = { ro: myAccountDataRo, en: myAccountDataEn };
-
 
 export default async function MyAccount({
    params,
@@ -15,7 +10,7 @@ export default async function MyAccount({
 }) {
    const { lang } = await params;
    const session = await auth();
-   // const myAccountData = translations[lang as keyof typeof translations] ?? translations.ro;
+
    const myAccountData = await getTranslation('myAccount', lang);
 
    if (!session) {
@@ -48,11 +43,20 @@ export default async function MyAccount({
       return lang === 'en' ? appointment.procedure.titleEn : appointment.procedure.titleRo
    }
 
-  function otherPartyLabel(appointment: (typeof appointments)[number]) {
-    const person = isDoctor ? appointment.patient : appointment.doctor;
-    const name = [person.firstName, person.lastName].filter(Boolean).join(' ');
-    return name || person.email;
-  }
+function otherPartyLabel(appointment: (typeof appointments)[number]) {
+   const person = isDoctor ? appointment.patient : appointment.doctor;
+
+   if (!person) {
+      // no account
+      const guestName = [appointment.guestFirstName, appointment.guestLastName]
+         .filter(Boolean)
+         .join(' ');
+      return guestName || appointment.guestEmail || '—';
+   }
+
+   const name = [person.firstName, person.lastName].filter(Boolean).join(' ');
+   return name || person.email;
+}
 
    return (
       <div className="mx-auto max-w-3xl px-6 py-16">
@@ -65,10 +69,10 @@ export default async function MyAccount({
 
          <section className="mt-10">
             <h2 className="text-lg font-semibold text-stone-700">
-               Programări viitoare
+               {myAccountData.sectionFutureAppointments}
             </h2>
             {upcoming.length === 0 ? (
-               <p className="mt-2 text-sm text-stone-500">Nu ai programări viitoare.</p>
+               <p className="mt-2 text-sm text-stone-500">{myAccountData.emptyState}</p>
             ) : (
                <ul className="mt-4 divide-y divide-stone-200">
                   {upcoming.map((a) => (
@@ -86,9 +90,9 @@ export default async function MyAccount({
          </section>
 
          <section className="mt-10">
-            <h2 className="text-lg font-semibold text-stone-700">Istoric</h2>
+            <h2 className="text-lg font-semibold text-stone-700">{myAccountData.history}</h2>
             {past.length === 0 ? (
-               <p className="mt-2 text-sm text-stone-500">Niciun istoric momentan.</p>
+               <p className="mt-2 text-sm text-stone-500">{myAccountData.noHistory}</p>
             ) : (
                <ul className="mt-4 divide-y divide-stone-200">
                   {past.map((a) => (

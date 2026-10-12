@@ -57,6 +57,8 @@ export default function Hero({ heroData }: { heroData: any }) {
                   loading="eager"
                   width={300}
                   height={400}
+                  priority
+                  className='h-auto w-full max-w-[300px]'
                />
             </div>
             <div className="flex flex-wrap justify-between uppercase text-stone-500 m-4 items-end">

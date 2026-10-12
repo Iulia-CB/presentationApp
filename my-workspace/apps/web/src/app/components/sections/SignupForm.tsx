@@ -67,7 +67,6 @@ export default function SignupForm({ signupFormData, activeTab, onSwitchToLogin,
    return (
       <form onSubmit={handleSubmit} className="mt-6 space-y-5">
 
-         {/* Title */}
          <h2 className="font-serif text-2xl text-stone-800">{signupFormData.title}</h2>
 
          {activeTab === 'patient'
@@ -75,7 +74,6 @@ export default function SignupForm({ signupFormData, activeTab, onSwitchToLogin,
             : (<p className="mt-1 text-sm text-stone-500">{signupFormData.subtitleDoctor}</p>)
          }
 
-         {/* Sign up fields */}
          <div>
             <label
                htmlFor="firstName"

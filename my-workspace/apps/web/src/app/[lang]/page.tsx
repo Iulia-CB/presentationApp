@@ -15,6 +15,7 @@ export default async function Page({
    const aboutData = await getTranslation('about', lang);
    const proceduresData = await getTranslation('procedures', lang);
    const contactData = await getTranslation('contact', lang);
+   const errorsContactData = await getTranslation('contactErrors', lang);
    const loginData = await getTranslation('authLogin', lang);
    const signupFormData = await getTranslation('authSignup', lang);
 
@@ -24,7 +25,8 @@ export default async function Page({
          <About aboutData={aboutData} />
          <Procedures proceduresData={proceduresData} />
          <Contact
-            contactData={contactData} 
+            contactData={contactData}
+            errorsContactData={errorsContactData}
             lang={lang}
          />
          <AuthSection

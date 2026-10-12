@@ -2,7 +2,7 @@ import { prisma } from "@/lib/prisma";
 import ContactSchedule from "./ContactSchedule";
 import ContactForm from "./ContactForm";
 
-export default async function Contact({ contactData, lang } : { contactData: any; lang: string }) {
+export default async function Contact({ contactData, errorsContactData, lang } : { contactData: any; errorsContactData: any; lang: string }) {
    const procedures = await prisma.procedure.findMany({
       select: { id: true, titleRo: true, titleEn: true },
       orderBy: { titleRo: 'asc' }
@@ -27,6 +27,7 @@ export default async function Contact({ contactData, lang } : { contactData: any
          <div className="mx-auto w-full max-w-md bg-stone-200 p-4">
             <ContactForm 
                contactData={contactData}
+               errorsContactData={errorsContactData}
                procedures={procedures}
                lang={lang} 
             />
