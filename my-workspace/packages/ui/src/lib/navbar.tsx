@@ -3,10 +3,12 @@ import Link from "next/link";
 export default function Navbar({
    lang,
    navBarData,
+   isLoggedIn = false,
    actions,
 }: {
    lang: string;
    navBarData: any;
+   isLoggedIn: boolean;
    actions?: React.ReactNode;
 }) {
    return(
@@ -16,18 +18,28 @@ export default function Navbar({
             <span className="text-xs text-stone-500 uppercase tracking-wide">{navBarData.subheading}</span>
          </div>
          <nav className="flex items-center gap-8 font-semibold">
-            <Link href="#about" className="hover:underline">{navBarData.about}</Link>
-            <Link href="#procedures" className="hover:underline">{navBarData.procedures}</Link>
+            <Link
+               href={`/${lang}#about`}
+               className="hover:underline"
+            >
+               {navBarData.about}
+            </Link>
+            <Link 
+               href={`/${lang}#procedures`}
+               className="hover:underline"
+            >
+               {navBarData.procedures}
+            </Link>
          </nav>
          <div className="flex items-center gap-4 font-medium">
             <Link
-               href='#auth'
+               href={isLoggedIn ? `/${lang}/myAccount` : `/${lang}#auth`}
                className="px-5 py-2.5 transition-colors hover:bg-stone-300"
             >
                {navBarData.myAccount}
             </Link>
             <Link 
-               href='#schedule' 
+               href={`/${lang}#schedule`}
                className="rounded-md bg-stone-700 px-5 py-2.5 font-semibold text-white transition-colors hover:bg-stone-500"
             >
                {navBarData.appointment}

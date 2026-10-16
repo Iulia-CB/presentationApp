@@ -5,6 +5,8 @@ import { supportedLanguages } from '../../i18n/config';
 import { auth } from '@/auth';
 import { getTranslation } from '@/lib/getTranslations';
 
+export const dynamicParams = false; 
+
 export function generateStaticParams() {
    return supportedLanguages.map((lang) => ({ lang }));
 }
@@ -26,8 +28,8 @@ export default async function LangLayout({
          <Navbar
             lang={lang}
             navBarData={navBarData}
-            actions={session && <LogoutButton lang={lang} 
-         />}
+            isLoggedIn={Boolean(session)}
+            actions={session && <LogoutButton lang={lang} />}
          />
          <main className="flex-1">{children}</main>
          <FooterSection

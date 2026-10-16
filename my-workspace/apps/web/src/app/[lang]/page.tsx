@@ -4,6 +4,7 @@ import Hero from "../components/sections/Hero";
 import Procedures from "../components/sections/Procedures";
 import Contact from "../components/sections/Contact";
 import AuthSection from "../components/sections/AuthSection";
+import { auth } from '@/auth';
 
 export default async function Page({
    params,
@@ -18,6 +19,7 @@ export default async function Page({
    const errorsContactData = await getTranslation('contactErrors', lang);
    const loginData = await getTranslation('authLogin', lang);
    const signupFormData = await getTranslation('authSignup', lang);
+   const session = await auth();
 
    return (
       <div >
@@ -29,11 +31,12 @@ export default async function Page({
             errorsContactData={errorsContactData}
             lang={lang}
          />
-         <AuthSection
-            loginData={loginData}
-            signupFormData={signupFormData}
-            lang={lang}
-         />
+         { !Boolean(session) && <AuthSection
+               loginData={loginData}
+               signupFormData={signupFormData}
+               lang={lang}
+            />
+         }
       </div>
    );
 }
